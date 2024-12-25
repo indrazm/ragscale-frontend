@@ -3,10 +3,7 @@ import { nextui } from "@nextui-org/react";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{ts,tsx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./src/**/*.{ts,tsx}", "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
@@ -14,6 +11,11 @@ module.exports = {
   plugins: [
     nextui({
       layout: {
+        boxShadow: {
+          small: "0 0px 2px 0 rgba(0, 0, 0, 0.15)",
+          medium: "0 0px 4px 0 rgba(0, 0, 0, 0.15)",
+          large: "0 0px 8px 0 rgba(0, 0, 0, 0.15)",
+        },
         borderWidth: {
           small: "0.5px",
           medium: "1px",

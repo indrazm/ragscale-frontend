@@ -2,6 +2,7 @@
 
 import { api } from "@/utils/api";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createProjectAction(_: unknown, formData: FormData) {
   const name = formData.get("name") as string;
@@ -22,6 +23,5 @@ export async function createProjectAction(_: unknown, formData: FormData) {
   }
 
   revalidatePath("/dashboard");
-
-  console.log({ error, message });
+  redirect("/dashboard");
 }
