@@ -16,7 +16,6 @@ export class ApiClient {
   private async getHeader() {
     const cookieStore = await cookies();
     const token = cookieStore.get("sessionId")?.value;
-    console.log({ token });
 
     return {
       Authorization: `Bearer ${token}`,
@@ -49,7 +48,10 @@ export class ApiClient {
     return result;
   }
 
-  async post<T>(path: string, data: Record<string, unknown>): Promise<Response<T>> {
+  async post<T>(
+    path: string,
+    data: Record<string, unknown>,
+  ): Promise<Response<T>> {
     const formData = new FormData();
 
     for (const key in data) {

@@ -13,11 +13,21 @@ export default async function DashboardPage() {
         <h3>Projects</h3>
         <p>Projects will be listed here</p>
       </section>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 items-start">
         {data?.map((item) => {
           return (
-            <Link key={item.id} href={`/dashboard/projects/${item.id}`} as={NextLink}>
-              <Card shadow="sm" isHoverable disableRipple className="w-full">
+            <Link
+              key={item.id}
+              href={`/dashboard/projects/${item.id}`}
+              as={NextLink}
+              className="w-full h-full"
+            >
+              <Card
+                shadow="sm"
+                isHoverable
+                disableRipple
+                className="w-full h-full"
+              >
                 <CardBody className="space-y-2 p-6">
                   <div className="flex gap-2 items-center justify-between">
                     <h3 className="text-lg font-medium">{item.name}</h3>
