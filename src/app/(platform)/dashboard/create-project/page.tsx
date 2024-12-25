@@ -37,6 +37,11 @@ export default function CreateProjectPage() {
           Create Project
         </Button>
       </form>
+      {state?.status === "error" && (
+        <p className="text-rose-500 text-center text-sm bg-rose-50 p-2 rounded-lg">
+          {state.message}
+        </p>
+      )}
     </div>
   );
 }

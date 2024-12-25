@@ -31,6 +31,10 @@ export async function loginAction(_: unknown, formData: FormData) {
   }
 
   cookieStore.set("user", JSON.stringify(data.user));
-  cookieStore.set("sessionId", data.sessionId);
+  cookieStore.set("sessionId", data.sessionId, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
   redirect("/dashboard");
 }

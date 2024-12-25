@@ -1,6 +1,7 @@
 "use server";
 
 import { api } from "@/utils/api";
+import { revalidatePath } from "next/cache";
 
 export async function createProjectAction(_: unknown, formData: FormData) {
   const name = formData.get("name") as string;
@@ -12,6 +13,15 @@ export async function createProjectAction(_: unknown, formData: FormData) {
     description,
     document,
   });
+
+  if (error) {
+    return {
+      status: "error",
+      message: message,
+    };
+  }
+
+  revalidatePath("/dashboard");
 
   console.log({ error, message });
 }
