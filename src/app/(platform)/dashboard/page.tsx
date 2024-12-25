@@ -9,7 +9,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="space-y-6">
-      <section>
+      <section className="pl-6 border-l">
         <h3>Projects</h3>
         <p>Projects will be listed here</p>
       </section>

@@ -4,7 +4,7 @@ import React from "react";
 export const Status = ({ status }: { status: string }) => {
   if (status === "ON-QUEUE") {
     return (
-      <Chip variant="dot" color="secondary" size="sm">
+      <Chip variant="shadow" color="secondary" size="sm">
         ON QUEUE
       </Chip>
     );
@@ -19,7 +19,7 @@ export const Status = ({ status }: { status: string }) => {
   }
 
   return (
-    <Chip variant="dot" color="success" size="sm">
+    <Chip variant="dot" color="success">
       DONE
     </Chip>
   );

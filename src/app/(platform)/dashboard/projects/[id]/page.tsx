@@ -24,7 +24,7 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
         </div>
         <p>{data?.description}</p>
       </section>
-      <section className="grid grid-cols-2 h-full">
+      <section className="grid grid-cols-2 h-full border">
         <iframe src={`http://localhost:8000/public/${data.id}/${data.document}`} width="100%" height="100%" title="PDF Viewer" />
         <ChatAI projectId={data.id} />
       </section>
