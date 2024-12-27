@@ -48,10 +48,7 @@ export class ApiClient {
     return result;
   }
 
-  async post<T>(
-    path: string,
-    data: Record<string, unknown>,
-  ): Promise<Response<T>> {
+  async post<T>(path: string, data: Record<string, unknown>): Promise<Response<T>> {
     const formData = new FormData();
 
     for (const key in data) {

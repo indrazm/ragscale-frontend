@@ -1,5 +1,6 @@
 import type { Project } from "@/models/entity";
 import { api } from "@/utils/api";
+import { cookies } from "next/headers";
 import NextLink from "next/link";
 import { ChatAI } from "./chatAi";
 import { Status } from "./status";
@@ -9,6 +10,9 @@ interface DashboardPageProps {
 }
 
 export default async function DashboardPage({ params }: DashboardPageProps) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("sessionId")?.value || "";
+
   const { id } = await params;
   const { error, data } = await api.get<Project>(`/projects/${id}`);
 
@@ -31,9 +35,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           <NextLink href={`/dashboard/projects/${data.id}/`}>Chat</NextLink>
         </div>
       </section>
-      <section className="grid grid-cols-2 h-full border">
-        <iframe src={`http://localhost:8000/public/${data.id}/${data.document}`} width="100%" height="100%" title="PDF Viewer" />
-        <ChatAI />
+      <section className="grid grid-cols-2 h-full">
+        <iframe src={`http://localhost:8000/public/${data.id}/${data.document}`} width="100%" height="100%" title="PDF Viewer" className="border" />
+        <ChatAI token={token} />
       </section>
     </main>
   );
