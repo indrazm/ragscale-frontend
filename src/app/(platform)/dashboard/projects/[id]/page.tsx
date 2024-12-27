@@ -1,8 +1,8 @@
 import type { Project } from "@/models/entity";
 import { api } from "@/utils/api";
+import NextLink from "next/link";
 import { ChatAI } from "./chatAi";
 import { Status } from "./status";
-import NextLink from "next/link";
 
 interface DashboardPageProps {
   params: Promise<{ id: string }>;
@@ -27,20 +27,13 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
           <p>{data.description}</p>
         </div>
         <div className="space-x-4">
-          <NextLink href={`/dashboard/projects/${data.id}/semantic-search`}>
-            Semantic Search
-          </NextLink>
+          <NextLink href={`/dashboard/projects/${data.id}/semantic-search`}>Semantic Search</NextLink>
           <NextLink href={`/dashboard/projects/${data.id}/`}>Chat</NextLink>
         </div>
       </section>
       <section className="grid grid-cols-2 h-full border">
-        <iframe
-          src={`http://localhost:8000/public/${data.id}/${data.document}`}
-          width="100%"
-          height="100%"
-          title="PDF Viewer"
-        />
-        <ChatAI projectId={data.id} />
+        <iframe src={`http://localhost:8000/public/${data.id}/${data.document}`} width="100%" height="100%" title="PDF Viewer" />
+        <ChatAI />
       </section>
     </main>
   );
