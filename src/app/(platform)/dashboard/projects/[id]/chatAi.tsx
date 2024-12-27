@@ -9,49 +9,37 @@ export const ChatAI = () => {
   const params = useParams();
   const [query, setQuery] = useState("");
   const [chatHistory, setChatHistory] = useState<string[]>([]);
-  const [response, setResponse] = useState("");
 
   async function chatAi(e: React.FormEvent<HTMLFormElement>) {
+    const currentQuery = query.trim();
     e.preventDefault();
     setChatHistory((prev) => [...prev, query]);
+    setQuery("");
 
     const res = await fetch(`http://localhost:8000/projects/${params.id}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer cm53yc2u50000rcfh831tfa72",
+        Authorization: "Bearer cm56tc2z60000m8s0i7np7gkt",
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query: currentQuery }),
     });
 
-    setQuery("");
     const data = await res.text();
-    console.log(data);
-
-    // chat typing effect
-    let i = 0;
-    const typeWriter = () => {
-      if (i < data.length) {
-        setResponse((prev) => prev + data.charAt(i));
-        i++;
-        setTimeout(typeWriter, 1);
-      }
-    };
-
-    typeWriter();
-    if (i === data.length) {
-      setChatHistory((prev) => [...prev, data]);
-      setResponse("");
-    }
+    setChatHistory((chats) => [...chats, data]);
   }
 
   return (
-    <div className="relative bg-neutral-50/20 px-4 pt-4 pb-2 flex flex-col justify-between h-full">
-      <div>
+    <div className="relative bg-neutral-50/20 px-8 pt-8 pb-4 flex flex-col justify-between h-full">
+      <div className="space-y-4">
         {chatHistory.map((chat) => {
-          return <div key={chat}>{chat}</div>;
+          const even = chatHistory.indexOf(chat) % 2 === 0;
+          return (
+            <div key={chat} className={`text-sm ${even ? "text-right" : "text-left"}`}>
+              {chat}
+            </div>
+          );
         })}
-        {response && <div>{response}</div>}
       </div>
       <form onSubmit={chatAi} className="absolute w-full bottom-0 left-0 px-4">
         <Input placeholder="Ask anything about the document" variant="bordered" value={query} onValueChange={(value) => setQuery(value)} />

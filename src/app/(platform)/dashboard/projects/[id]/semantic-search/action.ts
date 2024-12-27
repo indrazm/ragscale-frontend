@@ -3,8 +3,9 @@
 import { api } from "@/utils/api";
 
 interface EmbeddingDocuments {
-  document: string[];
-  distance: number[];
+  id: string;
+  pageContent: string;
+  score: number;
 }
 
 export async function semanticSearchAction(_: unknown, formData: FormData) {
@@ -17,5 +18,5 @@ export async function semanticSearchAction(_: unknown, formData: FormData) {
     return { status: "error", message };
   }
 
-  return { data: data[0] };
+  return { data };
 }

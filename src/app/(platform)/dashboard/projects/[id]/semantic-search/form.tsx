@@ -19,13 +19,13 @@ export const FormSemanticSearch = () => {
       <div className="space-y-6">
         {!pending &&
           state?.data &&
-          state.data.document?.map((doc, i) => {
+          state?.data?.map((doc, i) => {
             return (
               <Card key={i}>
                 <CardBody>
-                  <div>{doc}</div>
+                  <div>{doc.pageContent}</div>
                 </CardBody>
-                <CardFooter className="font-semibold">Embedding Distance : {state.data?.distance[i]}</CardFooter>
+                <CardFooter className="font-semibold">Embedding Distance : {doc.score}</CardFooter>
               </Card>
             );
           })}
